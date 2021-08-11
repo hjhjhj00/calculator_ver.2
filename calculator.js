@@ -44,22 +44,27 @@ function parseTEN(){
 parseTEN();
 //numberClick()의 return값 어떻게 받아오지??
 */
-
+var value=0; => 핵심!!!!
 function operationClick(event){
     const opr=event.target.innerText//data type: string
     var firstvalue = parseInt(firstnum)
-    var value;// => 계속 value값이 없는데, 여기에 firstvalue를 더하게 되니까 none이 나온 듯? 사실상 계속 value=0을 대입했던 거임..
+    //var value; => 계속 value값이 없는데, 여기에 firstvalue를 더하게 되니까 none이 나온 듯? 사실상 계속 value=0을 대입했던 거임..
     //var value =0;
     while(firstvalue != 0){
-        value=value+firstvalue
         
-        console.log(typeof(value));
+        if(value == 0){ //=이랑 ==해보셈.. 뭔가 잘못된 게 분명..
+            value=firstvalue
+            console.log("value=0")
+        }
+        else{
+            value=value+firstvalue
+            console.log("value is not 0")
+        }
         console.log("while",firstvalue, value);
         firstvalue=0
     }
     firstnum = 0
     //console.log(firstvalue+parseInt(firstnum));
-    console.log(value);
 }
 //handler함수 안에서 첫번째 click때는 이 일이 일어나고, 두번째 click때는 저 일이 일어나게 구현할 수는 없겠지?
 
