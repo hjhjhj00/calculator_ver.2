@@ -1,0 +1,105 @@
+body {
+  background-color: white;
+}
+
+body div {
+  cursor: pointer;
+}
+
+.calculator {
+  background-color: rgb(230, 230, 230);
+  width: 510px;
+}
+.button-xs {
+  width: 44px;
+  height: 34px;
+  line-height: 34px;
+}
+.button-xs > i {
+  line-height: 34px;
+}
+.button-xs:hover {
+  background-color: rgb(210, 210, 210);
+}
+.button-l {
+  width: 121px;
+  height: 83px;
+  line-height: 83px;
+  margin-top: 1px;
+  margin-bottom: 3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 10px;
+}
+.button-l > i {
+  line-height: 83px;
+}
+.button-l:hover {
+  background-color: #8b8b8b;
+  border-color: #8b8b8b;
+}
+.button-2 {
+  width: 121px;
+  height: 83px;
+  line-height: 83px;
+  margin-top: 1px;
+  margin-bottom: 3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 10px;
+}
+.button-2 > i {
+  line-height: 83px;
+}
+.button-2:hover {
+  background-color: #ffab2d;
+  border-color: #ffab2d;
+}
+.ib {
+  display: inline-block;
+}
+.bg-white {
+  background-color: white;
+}
+.bg-lightgray {
+  background-color: rgb(240, 240, 240);
+}
+.bg-gray {
+  background-color: rgb(190, 190, 190);
+}
+.bg-yellow {
+  background-color: rgb(255, 216, 41);
+}
+
+.d-flex {
+  display: flex;
+}
+.margin-left-auto {
+  margin-left: auto;
+}
+.text-align-right {
+  text-align: right;
+}
+.text-align-center {
+  text-align: center;
+}
+.f-bold {
+  font-weight: bold;
+}
+.f-medium {
+  font-size: 24px;
+}
+.f-large {
+  font-size: 48px;
+}
+.pr-20 {
+  padding-right: 20px;
+}
+.w-80 {
+  width: 80px;
+}
+.lh-35 {
+  line-height: 35px;
+}
