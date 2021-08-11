@@ -10,7 +10,6 @@ attachNum(a){
 */
 
 var firstnum = 0// 이면 if(firstnum) 은 거짓이다!
-var firstvalue = 0
 
 /*
 function u(){
@@ -32,11 +31,9 @@ function numberClick(event){
         firstnum=num
         console.log(firstnum);
     }else{
+        firstnum=firstnum+num
         console.log("firstnum:"+firstnum);
     }
-    
-
-    
 };
 
 /*
@@ -50,8 +47,21 @@ parseTEN();
 
 function operationClick(event){
     const opr=event.target.innerText//data type: string
-    console.log(typeof(event.target.innerText))
+    var firstvalue = parseInt(firstnum)
+    var value;// => 계속 value값이 없는데, 여기에 firstvalue를 더하게 되니까 none이 나온 듯? 사실상 계속 value=0을 대입했던 거임..
+    //var value =0;
+    while(firstvalue != 0){
+        value=value+firstvalue
+        
+        console.log(typeof(value));
+        console.log("while",firstvalue, value);
+        firstvalue=0
+    }
+    firstnum = 0
+    //console.log(firstvalue+parseInt(firstnum));
+    console.log(value);
 }
+//handler함수 안에서 첫번째 click때는 이 일이 일어나고, 두번째 click때는 저 일이 일어나게 구현할 수는 없겠지?
 
 function x(){
 switch ("+") {
