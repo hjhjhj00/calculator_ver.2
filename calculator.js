@@ -1,51 +1,13 @@
 const numbers= Array.from(document.querySelectorAll(".number"));
 const operations=Array.from(document.querySelectorAll(".operation"));
 const equal=document.querySelector(".equal");
-console.log(operations, Array.isArray(operations));
 
-/*
-attachNum(a){
-
-}
-//numberClick의 num변수를 return 시키는 대신 attchNum function. => no. numberClick() handler function 안에서 구현해 보자.
-*/
-
-var firstnum = 0// 이면 if(firstnum) 은 거짓이다!
+var firstnum = 0;// 이면 if(firstnum) 은 거짓이다!
 var firstvalue;
-/*
-function u(){
- if(firstnum){
-     console.log("a");
- }else if(2){ //일단 숫자 있는 경우 true로 친단 걸 확인.
-     console.log("b");
- }
-}
-u();
-*/
+var value=0;
+var operation;
+console.log(operation == null,!operation);
 
-function numberClick(event){
-    //console.log(typeof(parseInt(event.target.innerText)));//event.target.value 하면 안되고 innerText하면 된다.
-    const num=event.target.innerText//data type: string
-    //attachNum(num);
-    //return num
-    if(!firstnum){//처음에 firstnum이 0이므로 이걸 실행시키려면 !firstnum해야 함.
-        firstnum=num
-        console.log(firstnum);
-    }else{
-        firstnum=firstnum+num
-        console.log("firstnum:"+firstnum);
-    }
-};
-
-/*
-function parseTEN(){
-    const integer=numberClick();
-    console.log(integer+"bye");
-}
-parseTEN();
-//numberClick()의 return값 어떻게 받아오지??
-*/
-var value=0; //=> 핵심!!!!
 function calculate(a){
     switch(a){
         case("+"):
@@ -59,45 +21,47 @@ function calculate(a){
     }
 }
 
-function operationClick(event){
-    const opr=event.target.innerText//data type: string
-    console.log(opr==="+");
-    firstvalue = parseInt(firstnum)
-    //var value; => 계속 value값이 없는데, 여기에 firstvalue를 더하게 되니까 none이 나온 듯? 사실상 계속 value=0을 대입했던 거임..
-    //var value =0;
-    while(firstvalue != 0){
-        
-        if(value == 0){ //=이랑 ==해보셈.. 뭔가 잘못된 게 분명..
-            value=firstvalue
-            console.log("value=0")
+function numberClick(event){
+    const num=event.target.innerText//data type: string
+    if(!operation){
+        if(!firstnum){//처음에 firstnum이 0이므로 이걸 실행시키려면 !firstnum해야 함.
+            firstnum=num
+            console.log(firstnum);
+        }else{
+            firstnum=firstnum+num
+            console.log("firstnum:"+firstnum);
         }
-        else{
-            calculate(opr);
-            
-            console.log("value is not 0")
+        firstvalue = parseInt(firstnum)
+        value=firstvalue;
+    }else{
+        console.log("There's operation")
+        if(!firstnum){
+            firstnum=num
+            console.log(firstnum);
+        }else{
+            firstnum=firstnum+num
+            console.log("firstnum:"+firstnum);
         }
-        console.log("while",firstvalue, value);
-        firstvalue=0
+        firstvalue = parseInt(firstnum)
+        console.log("operation and click")
+        calculate(operation);
+        operation=null;
     }
-    firstnum = 0
-    //console.log(firstvalue+parseInt(firstnum));
+};
+
+
+
+
+function operationClick(event){
+    operation=event.target.innerText//data type: string
+    firstnum=0
 }
 //handler함수 안에서 첫번째 click때는 이 일이 일어나고, 두번째 click때는 저 일이 일어나게 구현할 수는 없겠지?
 function equalClick(){
     console.log(value);
+    firstnum=0
 }
 
-
-function x(){
-switch ("+") {
-    case "+":
-        return console.log("hi");
-    case "-":
-        return console.log("bye");
-
-}
-};
- x();
 
 numbers.forEach(function(number){
     number.addEventListener("click",numberClick);
