@@ -1,5 +1,6 @@
 const numbers= Array.from(document.querySelectorAll(".number"));
 const operations=Array.from(document.querySelectorAll(".operation"));
+const equal=document.querySelector(".equal");
 console.log(operations, Array.isArray(operations));
 
 /*
@@ -10,7 +11,7 @@ attachNum(a){
 */
 
 var firstnum = 0// 이면 if(firstnum) 은 거짓이다!
-
+var firstvalue;
 /*
 function u(){
  if(firstnum){
@@ -44,10 +45,24 @@ function parseTEN(){
 parseTEN();
 //numberClick()의 return값 어떻게 받아오지??
 */
-var value=0; => 핵심!!!!
+var value=0; //=> 핵심!!!!
+function calculate(a){
+    switch(a){
+        case("+"):
+            return value=value+firstvalue;
+        case("-"):
+            return value=value-firstvalue;
+        case("X"):
+            return value=value*firstvalue;
+        case("÷"):
+            return value=value/firstvalue;
+    }
+}
+
 function operationClick(event){
     const opr=event.target.innerText//data type: string
-    var firstvalue = parseInt(firstnum)
+    console.log(opr==="+");
+    firstvalue = parseInt(firstnum)
     //var value; => 계속 value값이 없는데, 여기에 firstvalue를 더하게 되니까 none이 나온 듯? 사실상 계속 value=0을 대입했던 거임..
     //var value =0;
     while(firstvalue != 0){
@@ -57,7 +72,8 @@ function operationClick(event){
             console.log("value=0")
         }
         else{
-            value=value+firstvalue
+            calculate(opr);
+            
             console.log("value is not 0")
         }
         console.log("while",firstvalue, value);
@@ -67,6 +83,10 @@ function operationClick(event){
     //console.log(firstvalue+parseInt(firstnum));
 }
 //handler함수 안에서 첫번째 click때는 이 일이 일어나고, 두번째 click때는 저 일이 일어나게 구현할 수는 없겠지?
+function equalClick(){
+    console.log(value);
+}
+
 
 function x(){
 switch ("+") {
@@ -86,3 +106,5 @@ numbers.forEach(function(number){
 operations.forEach(function(operation){
     operation.addEventListener("click",operationClick)
 })
+
+equal.addEventListener("click",event=>{equalClick()});
