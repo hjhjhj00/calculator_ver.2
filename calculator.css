@@ -2,10 +2,6 @@ body {
   background-color: white;
 }
 
-body div {
-  cursor: pointer;
-}
-
 .calculator {
   background-color: rgb(230, 230, 230);
   width: 510px;
