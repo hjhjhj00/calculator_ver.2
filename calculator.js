@@ -1,11 +1,13 @@
 const numbers= Array.from(document.querySelectorAll(".number"));
 const operations=Array.from(document.querySelectorAll(".operation"));
 const equal=document.querySelector(".equal");
+const pointButton=document.querySelector(".point");
 
-var firstnum = 0;// 이면 if(firstnum) 은 거짓이다!
+var firstnum = 0;
 var firstvalue;
 var value=0;
 var operation;
+var point;
 console.log(operation == null,!operation);
 
 function calculate(a){
@@ -22,27 +24,35 @@ function calculate(a){
 }
 
 function numberClick(event){
-    const num=event.target.innerText//data type: string
+    const num=event.target.innerText//data: string
     if(!operation){
-        if(!firstnum){//처음에 firstnum이 0이므로 이걸 실행시키려면 !firstnum해야 함.
+        if(!firstnum){
             firstnum=num
             console.log(firstnum);
-        }else{
+        }else if(firstnum && point){
+            firstnum=firstnum+point+num
+            console.log("point in firstnum:"+firstnum);
+            point=null;
+        }else if(firstnum && !point){
             firstnum=firstnum+num
             console.log("firstnum:"+firstnum);
         }
-        firstvalue = parseInt(firstnum)
+        firstvalue = parseFloat(firstnum)
         value=firstvalue;
     }else{
         console.log("There's operation")
         if(!firstnum){
             firstnum=num
             console.log(firstnum);
-        }else{
+        }else if(firstnum && point){
+            firstnum=firstnum+point+num
+            console.log("point in firstnum:"+firstnum);
+            point=null;
+        }else if(firstnum && !point){
             firstnum=firstnum+num
             console.log("firstnum:"+firstnum);
         }
-        firstvalue = parseInt(firstnum)
+        firstvalue = parseFloat(firstnum)
         console.log("operation and click")
         calculate(operation);
         operation=null;
@@ -50,25 +60,30 @@ function numberClick(event){
 };
 
 
-
-
 function operationClick(event){
-    operation=event.target.innerText//data type: string
+    operation=event.target.innerText
+    console.log(operation)
     firstnum=0
 }
-//handler함수 안에서 첫번째 click때는 이 일이 일어나고, 두번째 click때는 저 일이 일어나게 구현할 수는 없겠지?
+
 function equalClick(){
     console.log(value);
     firstnum=0
 }
 
+function pointClick(event){
+    point=event.target.innerText;
+    console.log(point, point === ".", operation)
+}
 
 numbers.forEach(function(number){
     number.addEventListener("click",numberClick);
 })
 
 operations.forEach(function(operation){
-    operation.addEventListener("click",operationClick)
+    operation.addEventListener("click",operationClick);
 })
 
 equal.addEventListener("click",event=>{equalClick()});
+
+pointButton.addEventListener("click",pointClick);
