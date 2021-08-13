@@ -135,8 +135,12 @@ function openBrackets(event){
 }
 
 function closeBrackets(event){
-    //if(count==1)
-    arr.push(firstvalue);
+    if(count==1){
+        count=0
+    }else{
+        arr.push(firstvalue);
+    }
+
     arr.push(")")
     console.log(arr)
     firstnum=0
