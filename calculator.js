@@ -6,6 +6,7 @@ const conversions=Array.from(document.querySelectorAll(".conversion"));
 const signs=document.querySelector(".sign");
 const openBracket=document.querySelector(".openBracket");
 const closeBracket=document.querySelector(".closeBracket");
+const backspace=document.querySelector(".backspace");
 
 var firstnum = 0;
 var firstvalue;
@@ -19,6 +20,8 @@ var arr=[];
 var open;
 var close;
 var arrSlice;
+var first;
+var count;
 //console.log(parseInt("2")+"+"+parseFloat("3.5")+"*"+parseInt("10"));
 /*
 var arr=[2,"+",3.5,"X",54,"÷",9,"X",2,"-",6,"÷",3];
@@ -59,59 +62,13 @@ function calculate(arr){
         }
     }
 }
-/*
-while(arr.indexOf("(")!=-1){
-    open=arr.indexOf("(")
-    close=arr.indexOf(")")
-    console.log(close-open+1)
-    arrSlice=arr.slice(open,close+1)
-    arrSlice.shift()
-    arrSlice.pop()
-    console.log("arrSlice :"+arrSlice)
-    calculate(arrSlice);
-    console.log("result :"+arrSlice);
-    arr.splice(open,close-open+1,arrSlice[0])
-    console.log(arr)
-}
 
-for(var i=0; i<arr.length; i++){
-    if(arr[i]=="X" || arr[i]=="÷"){
-        if(arr[i]=="X"){
-            arr[i]=arr[i-1]*arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            console.log("This is :"+arr[3])
-            i=i-2
-        }else if(arr[i]=="÷"){
-            arr[i]=arr[i-1]/arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            i=i-2
-        }
-    console.log("length: "+arr.length);
-    }
-}
-for(var i=0; i<arr.length; i++){
-    if(arr[i]=="+" || arr[i]=="-"){
-        if(arr[i]=="+"){
-            console.log("init"+arr+"i :"+i)
-            arr[i]=arr[i-1]+arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            
-            console.log("last :"+arr+"i :"+i)
-            i=i-2//이대로 ㄱㅊ??
-        }else if(arr[i]=="-"){
-            arr[i]=arr[i-1]-arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            i=i-2
-        }
-    console.log("length: "+arr.length);
-    }
-}
-console.log(arr)
-
-//var length=arr.length
-*/
 function numberClick(event){
     const num=event.target.innerText//data: string
+    if(count==1){
+        firstnum=first
+        count=0
+    }
         if(!firstnum){
             firstnum=num
             console.log("num: "+firstnum);
@@ -140,6 +97,7 @@ function operationClick(event){
     arr.push(operation)
     console.log(arr)
     firstnum=0
+    console.log("print"+firstnum);
 }
 
 function pointClick(){
@@ -168,13 +126,51 @@ function signClick(event){
 function openBrackets(event){
     arr.push("(")
     console.log(arr)
+    firstnum=0
 }
 
 function closeBrackets(event){
     arr.push(firstvalue);
     arr.push(")")
     console.log(arr)
+    firstnum=0
 }
+
+
+function backspaceClick(event){
+    console.log("IS? :")
+    console.log(firstnum==0)
+    if(firstnum==0){
+        arr.pop();
+        console.log(arr);
+    }else{
+        console.log(typeof(firstvalue));
+        first=firstvalue.toString();
+        console.log(first);
+        first = first.slice(0,-1);
+        console.log("This is")
+        console.log(first)
+        var firstnumber=parseFloat(first)
+        console.log(first)
+        count=1;
+        console.log(count==1)
+
+        //firstvalue=firstnumber
+        //firstvalue=first
+        //print(firstvalue);
+        
+    }
+    /*
+    var lastArr=arr[arr.length-1]
+    console.log(typeof(lastArr));
+    
+    if(typeof(arr[arr.length-1]!="number")){
+        arr.pop();
+        console.log(arr);}*/
+    
+    }
+    
+
 
 var open;
 var close;
@@ -204,35 +200,7 @@ while(arr.indexOf("(")!=-1){
 }
 console.log("Initial:"+arr)
 calculate(arr);
-/*
-for(var i=0; i<arr.length; i++){
-    if(arr[i]=="X" || arr[i]=="÷"){
-        if(arr[i]=="X"){
-            arr[i]=arr[i-1]*arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            i=i-2
-        }else if(arr[i]=="/"){
-            arr[i]=arr[i-1]/arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            i=i-2
-        }
-    }
-}
-for(var i=0; i<arr.length; i++){
-    if(arr[i]=="+" || arr[i]=="-"){
-        if(arr[i]=="+"){
-            console.log("init"+arr+"i :"+i)
-            arr[i]=arr[i-1]+arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            i=i-2//이대로 ㄱㅊ??
-        }else if(arr[i]=="-"){
-            arr[i]=arr[i-1]-arr[i+1]
-            arr.splice(i-1,3,arr[i])
-            i=i-2
-        }
-    }
-}
-*/
+
 console.log(arr)
 arr=[]
 firstnum=0
@@ -255,3 +223,4 @@ signs.addEventListener("click",event=>{signClick();});
 equal.addEventListener("click",event=>{equalClick();});
 openBracket.addEventListener("click",openBrackets);
 closeBracket.addEventListener("click",closeBrackets);
+backspace.addEventListener("click",backspaceClick);
