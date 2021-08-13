@@ -15,74 +15,69 @@ var operation;
 var point;
 var conversion;
 var sign;
-var bracket;
 var arr=[];
 var open;
 var close;
 var arrSlice;
 var first;
 var count;
-//console.log(parseInt("2")+"+"+parseFloat("3.5")+"*"+parseInt("10"));
-/*
-var arr=[2,"+",3.5,"X",54,"÷",9,"X",2,"-",6,"÷",3];
-var arr=["(",1,"+",2,")","X",5,"÷",5.5,"+","(",5,"-",1,")"]
-console.log(arr);
-*/
+
 function calculate(arr){
     for(var i=0; i<arr.length; i++){
         if(arr[i]=="X" || arr[i]=="÷"){
             if(arr[i]=="X"){
                 arr[i]=arr[i-1]*arr[i+1]
                 arr.splice(i-1,3,arr[i])
-                console.log("This is :"+arr[3])
+                
                 i=i-2
             }else if(arr[i]=="÷"){
                 arr[i]=arr[i-1]/arr[i+1]
                 arr.splice(i-1,3,arr[i])
                 i=i-2
             }
-        console.log("length: "+arr.length);
+        
         }
     }
     for(var i=0; i<arr.length; i++){
         if(arr[i]=="+" || arr[i]=="-"){
             if(arr[i]=="+"){
-                console.log("init"+arr+"i :"+i)
+                
                 arr[i]=arr[i-1]+arr[i+1]
                 arr.splice(i-1,3,arr[i])
                 
-                console.log("last :"+arr+"i :"+i)
+                
                 i=i-2//이대로 ㄱㅊ??
             }else if(arr[i]=="-"){
                 arr[i]=arr[i-1]-arr[i+1]
                 arr.splice(i-1,3,arr[i])
                 i=i-2
             }
-        console.log("length: "+arr.length);
+        
         }
     }
 }
 
 function numberClick(event){
-    const num=event.target.innerText//data: string
+    const num=event.target.innerText
     if(count==1){
         firstnum=first
         count=0
+        //console.log("What is"+typeof(first))
     }
         if(!firstnum){
             firstnum=num
-            console.log("num: "+firstnum);
+            
         }else if(firstnum && point){
             firstnum=firstnum+point+num
-            console.log("point in firstnum:"+firstnum);
+            
             point=null;
         }else if(firstnum && !point){
             firstnum=firstnum+num
-            console.log("firstnum:"+firstnum);
+            
         }
         firstvalue = parseFloat(firstnum)
         console.log(firstvalue);
-        console.log(arr)
+        //console.log(arr)
         
     
 };
@@ -96,19 +91,19 @@ function operationClick(event){
         }
     }
     
-    console.log(arr);
+    //console.log("cal: "+arr);
     operation=event.target.innerText
     console.log(operation)
     arr.push(operation)
-    console.log(arr)
+    console.log("cal: "+arr)
     firstnum=0
-    console.log("print"+firstnum);
+    
 }
 
 function pointClick(){
-    console.log("There's original operation: "+operation)
+    
     point="."
-    console.log(point, point === ".")
+    
 }
 function conversionClick(event){
     conversion=event.target.innerText
@@ -130,7 +125,8 @@ function signClick(event){
 
 function openBrackets(event){
     arr.push("(")
-    console.log(arr)
+    console.log("(")
+    console.log("cal :"+arr)
     firstnum=0
 }
 
@@ -140,31 +136,29 @@ function closeBrackets(event){
     }else{
         arr.push(firstvalue);
     }
-
     arr.push(")")
-    console.log(arr)
+    console.log(")")
+    console.log("cal :"+arr)
     firstnum=0
 }
 
 
 function backspaceClick(event){
-    console.log("IS? :")
-    console.log(firstnum==0)
+    
     if(firstnum==0){
         arr.pop();
-        console.log(arr);
+        console.log("cal :"+arr);
         count=1;
     }else{
-        console.log(typeof(firstvalue));
+        
         first=firstvalue.toString();
-        console.log(first);
+        
         first = first.slice(0,-1);
-        console.log("This is")
-        console.log(first)
-        var firstnumber=parseFloat(first)
+        
+        //var firstnumber=parseFloat(first)=>string으로 return할거라 필요x
         console.log(first)
         count=1;
-        console.log(count==1)
+        //console.log(count==1)
 
         //firstvalue=firstnumber
         //firstvalue=first
@@ -186,33 +180,32 @@ function backspaceClick(event){
 var open;
 var close;
 var arrSlice;
-//var bracketResult;
+
 function equalClick(){
-    console.log(arr[arr.length-1]!=")")
-    console.log(arr[arr.length-1])
+    //console.log(arr[arr.length-1]!=")")
+    //console.log(arr[arr.length-1])
     if(arr[arr.length-1]!=")"){
         arr.push(firstvalue)
     }
     
-    console.log(arr);
+    console.log("cal :"+arr);
 while(arr.indexOf("(")!=-1){
     open=arr.indexOf("(")
     close=arr.indexOf(")")
-    console.log(close-open+1)
+    //console.log(close-open+1)
     arrSlice=arr.slice(open,close+1)
     arrSlice.shift()
     arrSlice.pop()
-    console.log("REALarrSlice :"+arrSlice)
+    
     calculate(arrSlice);
-    console.log("REALresult :"+arrSlice);
-    console.log("arrSlice"+arrSlice+arrSlice.length)
+   
     arr.splice(open,close-open+1,arrSlice[0])
-    console.log("REAL :"+arr)
+    
 }
-console.log("Initial:"+arr)
+
 calculate(arr);
 
-console.log(arr)
+console.log("result: "+arr)
 arr=[]
 firstnum=0
 }
