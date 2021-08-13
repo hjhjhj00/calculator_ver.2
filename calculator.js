@@ -88,9 +88,14 @@ function numberClick(event){
 };
 
 function operationClick(event){
-    if(arr[arr.length-1]!=")"){
-        arr.push(firstvalue)
+    if(count==1){
+        count==0
+    }else{
+        if(arr[arr.length-1]!=")"){
+            arr.push(firstvalue)
+        }
     }
+    
     console.log(arr);
     operation=event.target.innerText
     console.log(operation)
@@ -130,6 +135,7 @@ function openBrackets(event){
 }
 
 function closeBrackets(event){
+    //if(count==1)
     arr.push(firstvalue);
     arr.push(")")
     console.log(arr)
@@ -143,6 +149,7 @@ function backspaceClick(event){
     if(firstnum==0){
         arr.pop();
         console.log(arr);
+        count=1;
     }else{
         console.log(typeof(firstvalue));
         first=firstvalue.toString();
